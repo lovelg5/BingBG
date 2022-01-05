@@ -39,7 +39,8 @@ jobs:
           curl -O https://bingwallpaperimages.azureedge.net/hpimages/Latest/3840x2160/$(date "+%Y%m%d").jpg
       # Runs a set of commands using the runners shell
       - run: |
+         export myComment="add pic: $(date '+%Y%m%d')"
          git add *
-         git commit -m | echo add pic $(date "+%Y%m%d")
+         git commit -m "$myComment"
          git push
          echo commit done!
