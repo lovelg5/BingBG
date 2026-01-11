@@ -1,31 +1,31 @@
-name: Bing Wallpaper Crawler and Archive 2024
+name: Bing Wallpaper Crawler and Archive 2025
 
 on:
   # 手动触发（方便测试，不用等定时）
   workflow_dispatch:
 
 jobs:
-  move-2023-wallpaper:
+  move-2025-wallpaper:
     runs-on: ubuntu-latest
     steps:
       # 步骤1：拉取仓库代码到运行环境
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # 步骤2：核心步骤 - 批量移动2024年的图片到 wallpaper2024 文件夹
-      - name: Batch move 2024 wallpaper files
+      # 步骤2：核心步骤 - 批量移动2024年的图片到 wallpaper2025 文件夹
+      - name: Batch move 2025 wallpaper files
         run: |
           # 1. 创建目标文件夹（不存在则创建，避免移动时报错）
-          mkdir -p "wallpaper2024"
+          mkdir -p "wallpaper2025"
 
-          # 2. 筛选并移动所有2024开头的图片文件（适配你的年月日命名规则）
-          # 匹配 "bing wallpaper/2024*.jpg"（如果是其他格式，比如png，改成2023*.png）
+          # 2. 筛选并移动所有2025开头的图片文件（适配你的年月日命名规则）
+          # 匹配 "bing wallpaper/2025*.jpg"（如果是其他格式，比如png，改成2025*.png）
           # 用 mv 命令批量移动，-n 确保不覆盖目标文件夹已有文件
-          mv -n "bing wallpaper/2024"*.* "wallpaper2024/"
+          mv -n "bing wallpaper/2025"*.* "wallpaper2025/"
 
           # 可选：打印移动结果，方便日志排查
-          echo "已移动的2024年文件列表："
-          ls -l "wallpaper2024/" | grep 2024
+          echo "已移动的2025年文件列表："
+          ls -l "wallpaper2025/" | grep 2025
 
       # 步骤3：提交并推送移动后的文件到GitHub仓库
       - name: Commit and push changes
@@ -39,8 +39,8 @@ jobs:
 
           # 检查是否有更改，避免空提交（比如2023年文件已移完）
           if git diff --cached --quiet; then
-            echo "没有2024年的图片需要移动"
+            echo "没有2025年的图片需要移动"
           else
-            git commit -m "Move all 2024 Bing wallpaper to wallpaper2024 folder"
+            git commit -m "Move all 2025 Bing wallpaper to wallpaper2025 folder"
             git push
           fi
